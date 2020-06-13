@@ -1,0 +1,12 @@
+<template>
+    <input type="text" value={inpValue} data-id="varvar" onkeyup={handleChange}/>
+    <p data-id="finalData">Value is {inpValue}</p>
+    <div class="bgr">
+        <lightning-datatable
+                key-field="id"
+                data={accList}
+                columns={columns}>
+        </lightning-datatable>
+    </div>
+    
+</template>

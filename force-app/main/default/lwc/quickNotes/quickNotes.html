@@ -1,0 +1,8 @@
+<template>
+    <div class="container">
+        <h2>STICKY NOTES</h2>
+        <textarea rows="10" style="width: 100%;" maxlength={fieldLength} onfocusout={handleFocusOut} onfocus={handleFocusOn} onmouseout={handleMouseOut} onkeyup={changeCount}>{inpText}</textarea>
+        <p class="count">Characters Left : {usedLength}/{fieldLength}</p>
+    </div>
+    
+</template>

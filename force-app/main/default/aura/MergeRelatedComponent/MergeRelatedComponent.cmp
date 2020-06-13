@@ -1,0 +1,82 @@
+<aura:component controller="MergeRelatedController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="currentStep" type="String" default="1"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="queuecolumns" type="List"/>
+    <aura:attribute name="selectedRowList" type="List"/>
+    <aura:attribute name="data" type="List"/>
+    <aura:attribute name="queuedata" type="List" default=""/>
+    <aura:attribute name="selectedqueuedata" type="List"/>
+    <aura:attribute name="deleteRecords" type="List"/>
+    <aura:attribute name="objectName" type="String"/>
+    <aura:attribute name="InitWrapperData" type="Object"/>
+    
+    <div >
+        <div class="">
+            <!-- ###### MODAL BOX HEADER Part Start From Here ######-->
+            <div class="slds-modal__header">
+                
+                <!--lightning progressIndicator start-->
+                <lightning:progressIndicator currentStep="{!v.currentStep}" type="path">
+                    <lightning:progressStep  label="Duplicate Records" value="1" onclick="{!c.selectFromHeaderStep}"/>
+                    <lightning:progressStep  label="Confirmation" value="2" onclick="{!c.selectFromHeaderStep}"/>
+                    
+                </lightning:progressIndicator>
+            </div>
+            
+            <!--###### MODAL BOX BODY Part Start From Here ######-->
+            <div class="slds-modal__content slds-p-around_medium">
+                <!--showing 2 screens based on progress indicator steps-->
+                <div class="{!v.currentStep == '1' ? 'slds-show' : 'slds-hide'}">
+                    <h2 class="tabHeader">Duplicate {!v.objectName} Records</h2>
+                    <lightning:datatable
+                			keyField="id"
+                			data="{! v.data }"
+                			columns="{! v.columns }"
+                            onrowselection="{! c.getSelectedRows}"
+                            hideCheckboxColumn="false"/>
+                    <br/><br/>
+                    <div class="{!v.queuedata.length != 0 ? 'slds-show' : 'slds-hide'}">
+                        <h2 class="tabHeader">Records Queued For Merging</h2>
+                        <lightning:datatable
+                                             keyField="id"
+                                             data="{! v.queuedata }"
+                                             columns="{! v.queuecolumns }"
+                                             onrowselection="{! c.getSelectedRows}"
+                                             onrowaction ="{!c.handleQueueAction}"
+                                             hideCheckboxColumn="true"/>
+                    </div>
+                    <div class="{!v.queuedata.length == 0 ? 'slds-show' : 'slds-hide'}">
+                    	<h2 class="norecs">No Records Queued for Merging</h2>
+                    </div>
+                </div>
+                <div class="{!v.currentStep == '2' ? 'slds-show' : 'slds-hide'}" style="color:green">
+                    Records will be merged under batch that runs every 20 mins, Please select Finish to add this Merge request to batch
+                </div>
+                
+            </div>
+            
+            <!--###### MODAL BOX FOOTER Part Start From Here ######-->
+            <div class="slds-modal__footer slds-modal__footer_directional">
+                <lightning:button disabled="{!v.currentStep != '1' ? '' : 'disabled'}"
+                                  variant="neutral" 
+                                  label="Back"
+                                  title="Back"
+                                  onclick="{! c.moveBack }"/>
+                <aura:if isTrue="{!v.currentStep != '2'}">
+                    <lightning:button variant="brand" 
+                                      label="Next"
+                                      title="Next"
+                                      onclick="{! c.moveNext }"/>
+                </aura:if>
+                <aura:if isTrue="{!v.currentStep == '2'}"> 
+                    <lightning:button variant="brand" 
+                                      label="Finish"
+                                      title="Finish"
+                                      onclick="{! c.finish }"/>  
+                </aura:if>
+            </div>
+        </div>
+    </div>
+    
+</aura:component>

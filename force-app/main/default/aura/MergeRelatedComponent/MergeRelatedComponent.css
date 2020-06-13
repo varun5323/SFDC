@@ -1,0 +1,12 @@
+.THIS .tabHeader {
+    text-align:center;
+    margin-bottom:1%;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.THIS .norecs{
+    text-align:center;
+    color:red;
+    font-size:16px;
+}
