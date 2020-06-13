@@ -6,14 +6,8 @@
             "c/firstLWC": [
                 "firstLWC/firstLWC.js"
             ],
-            "c/FirstLWC": [
-                "FirstLWC/FirstLWC.js"
-            ],
             "c/quickNotes": [
                 "quickNotes/quickNotes.js"
-            ],
-            "c/QuickNotes": [
-                "QuickNotes/QuickNotes.js"
             ]
         }
     },
