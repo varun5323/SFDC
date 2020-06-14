@@ -2,14 +2,7 @@
     "compilerOptions": {
         "experimentalDecorators": true,
         "baseUrl": ".",
-        "paths": {
-            "c/firstLWC": [
-                "firstLWC/firstLWC.js"
-            ],
-            "c/quickNotes": [
-                "quickNotes/quickNotes.js"
-            ]
-        }
+        "paths": {}
     },
     "include": [
         "**/*",
