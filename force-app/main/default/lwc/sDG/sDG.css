@@ -1,0 +1,50 @@
+.heading{
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+.detailBtn{
+    margin-top: 1%;
+    padding: 0.45%;
+    font-size: 15px;
+    width: 15%;
+    background: green;
+    border: none;
+    color: white;
+    border-radius: 3px;
+}
+.detailBtn:hover{
+    background-color: beige;
+    color:black;
+}
+
+.detailBtn:focus{
+    border : none;
+}
+
+span.detailInfo {
+    margin-left: 2%;
+    font-size: 15px;
+}
+
+span.detailLabel {
+    font-size: 16px;
+    font-weight: bolder;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    font-size: 16px;
+    width: 15%;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }

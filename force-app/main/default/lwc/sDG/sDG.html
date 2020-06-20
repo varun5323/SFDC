@@ -1,0 +1,61 @@
+<template>
+    
+    <!--Select {FieldNamesRefined} from {ChildObject} WHERE {RealtionField} = '{recordId}'
+    Columns Data-{columns}-->
+    <div>
+        <template if:true={hasRuleName}>
+            <p class="heading">{sdgDetails.childObjectName} Records</p>
+        </template>
+        <template if:false={hasRuleName}>
+            <p class="heading">{ChildObject} Records</p>
+        </template>
+        <lightning-datatable
+                    key-field="id"
+                    data={data}
+                    columns={columns}>
+            </lightning-datatable>
+            <button class="detailBtn" onclick={showDetails}>{btnName}</button>
+            <template if:true={areDetailsVisible}>
+                <div class="slds-m-vertical_medium">
+                    <table>
+                        <tr>
+                            <th>Detail</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr>
+                            <td>Object Name</td>
+                            <td>{sdgDetails.childObjectName}</td>
+                        </tr>
+                        <tr>
+                            <td>RealtionField</td>
+                            <td>{sdgDetails.relationName}</td>
+                        </tr>
+                        <tr>
+                            <td>Fields Queried</td>
+                            <td>{sdgDetails.fields}</td>
+                        </tr>
+                        <tr>
+                            <td>SDG Rule Name</td>
+                            <td>{sdgDetails.ruleName}</td>
+                        </tr>
+                        <tr>
+                            <td>Condition</td>
+                            <td>{sdgDetails.condition}</td>
+                        </tr>
+                        <tr>
+                            <td>Columns</td>
+                            <td>{sdgDetails.columns}</td>
+                        </tr>
+                    </table>
+                    <!--<span class="detailLabel">Object Name : </span><span class="detailInfo">{sdgDetails.childObjectName}</span><br>
+                    <span class="detailLabel">RealtionField : </span><span class="detailInfo">{sdgDetails.relationName}</span><br>
+                    <span class="detailLabel">Fields Queried : </span><span class="detailInfo">{sdgDetails.fields}</span><br>
+                    <span class="detailLabel">SDG Rule Name : </span><span class="detailInfo">{sdgDetails.ruleName}</span><br>
+                    <span class="detailLabel">Condition : </span><span class="detailInfo">{sdgDetails.condition}</span><br>
+                    <span class="detailLabel">Columns : </span><span class="detailInfo">{sdgDetails.columns}</span><br>-->
+                    
+                </div>
+            </template>
+    </div>
+    
+</template>
