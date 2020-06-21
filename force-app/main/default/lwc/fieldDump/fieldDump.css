@@ -1,0 +1,24 @@
+*{
+    box-sizing: border-box;
+}
+
+.content{
+    background: #f9ca24;
+    padding: 1%;
+    margin: auto;
+    width: 100%;
+}
+
+.options{
+    padding: 10px;
+}
+
+input[type="radio"],input[type="checkbox"]{
+    margin: 10px;
+}
+label{
+    padding: 10px;
+}
+.slds-dueling-list__column.slds-dueling-list__column_responsive {
+    flex: none !important ;
+}

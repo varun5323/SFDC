@@ -2,7 +2,14 @@
     "compilerOptions": {
         "experimentalDecorators": true,
         "baseUrl": ".",
-        "paths": {}
+        "paths": {
+            "c/fieldDump": [
+                "fieldDump/fieldDump.js"
+            ],
+            "c/FieldDump": [
+                "FieldDump/FieldDump.js"
+            ]
+        }
     },
     "include": [
         "**/*",

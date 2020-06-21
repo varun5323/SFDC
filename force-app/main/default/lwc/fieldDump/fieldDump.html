@@ -1,0 +1,26 @@
+<template>
+    <div class="content">
+    <lightning-dual-listbox class=""
+    id="selectOptions"
+        name="Select Options"
+        label="Select Options"
+        source-label="Available Options"
+        selected-label="Selected Options"
+        options={listOptions}
+        value={defaultOptions}
+        
+        onchange={handleListChange}>
+    </lightning-dual-listbox>
+    <div class="options">
+        <input type="radio" id="default" name="seevals" value="default" onchange={handleRadioChange}>
+        <label for="default">Default Objects</label><br>
+        <input type="radio" id="cs" name="seevals" value="cs" onchange={handleRadioChange}>
+        <label for="cs">See Objects from Custom Settings Only</label><br>
+        <input type="radio" id="noncs" name="seevals" value="noncs" onchange={handleRadioChange}>
+        <label for="noncs">See All Objects</label><br>
+        <input type="checkbox" name="onecsv" id="onecsv" onchange={handleCheckChange}>
+        <label for="onecsv">One CSV/Object</label><br>
+        <button onclick={downloadCsv}>Download Now</button>
+    </div>
+    </div>
+</template>
