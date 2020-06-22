@@ -3,7 +3,7 @@
 }
 
 .content{
-    background: #f9ca24;
+    background: #3498db;
     padding: 1%;
     margin: auto;
     width: 100%;
@@ -21,4 +21,13 @@ label{
 }
 .slds-dueling-list__column.slds-dueling-list__column_responsive {
     flex: none !important ;
+}
+button{
+    width: 10%;
+    padding: 10px;
+    font-size: 15px;
+    background: #2ecc71;
+    border: none;
+    border-radius: 10px;
+    margin-top: 15px;
 }
