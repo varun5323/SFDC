@@ -1,0 +1,11 @@
+Components:
+    soql - Visualforce page
+
+How to : 
+    Write your query in the your query textarea and click Go to get results in a table
+Features: 
+    The query accepts * just like in sql ex: select * from account will give all fields data for Account
+    You can also use this page to get fieldList and its type for a specific object. Use DESC key word. Ex: DESC Account will give fields list and details of Account object
+    You can see the results in CSV by checking Show results in csv checkbox which displays results in csv you can copy that csv and paste in excel
+    Permalink will give you a link with a executable query ex: Select id from account permalink will be https://vkathsoql-dev-ed--c.visualforce.com/apex/soql?query=select id from account
+    
