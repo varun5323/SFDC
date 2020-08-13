@@ -2,7 +2,17 @@
     "compilerOptions": {
         "experimentalDecorators": true,
         "baseUrl": ".",
-        "paths": {}
+        "paths": {
+            "c/QuestionnaireForm": [
+                "QuestionnaireForm/QuestionnaireForm.js"
+            ],
+            "c/utils": [
+                "utils/utils.js"
+            ],
+            "c/questionnaireForm": [
+                "questionnaireForm/questionnaireForm.js"
+            ]
+        }
     },
     "include": [
         "**/*",
