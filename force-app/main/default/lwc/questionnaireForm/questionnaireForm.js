@@ -98,9 +98,13 @@ export default class QuestionnaireForm extends LightningElement {
             if(eachRow.Questionnaire_Items__r != undefined){
                 var shortNames = '';
                 eachRow.Questionnaire_Items__r.forEach(qi=>{
+                    var attName = 'data-'+qi.Short_Name__c.toLowerCase();
+                    var attVal = qi.Dependent_Answer__c;
+                    childElement.setAttribute(attName,attVal);
                     shortNames += qi.Short_Name__c+';';
                 })
                 childElement.setAttribute('data-dependentques',shortNames);
+
 
             }
         }
@@ -212,7 +216,8 @@ export default class QuestionnaireForm extends LightningElement {
 
     handleChange(event){
         console.log('Value is--' + event.target.value);
-        var dependentques = event.target.dataset.dependentques;
+        var fieldVal = event.target.value;
+        var dependentques = event.target.dataset['dependentques'];
         var dependentquesList = [];
         if(dependentques.length > 0){
             dependentquesList = dependentques.split(';');
@@ -220,16 +225,33 @@ export default class QuestionnaireForm extends LightningElement {
         /*var templ = document.querySelector('form');
         console.log('templ1---' + templ);*/
         dependentquesList.forEach(dq=>{
-            var datId = '#'+dq;
-            var labelId = '#'+dq+'label';
-            var elem = document.querySelector(datId);
-            elem.setAttribute('hidden','true');
-            var labelElem = document.querySelector(labelId);
-            labelElem.previousElementSibling.setAttribute('style','display:none');
-            labelElem.setAttribute('style','display:none');
-
-        })
-        console.log('DataSet--' + event.target.dataset.dependentques);
+            if(dq.length > 0){
+                
+                var datId = '#'+dq;
+                var labelId = '#'+dq+'label';
+                var elem = document.querySelector(datId);
+                if(elem != undefined){
+                    var dataset = event.target.dataset[dq.toLowerCase()];
+                    console.log('ds for '+ dq + ' is ' + dataset);
+                    if(!dataset.includes(fieldVal)){
+                        console.log('Not Matched');
+                        elem.setAttribute('hidden','true');
+                        var labelElem = document.querySelector(labelId);
+                        labelElem.previousElementSibling.setAttribute('style','display:none');
+                        labelElem.setAttribute('class','__web-inspector-hide-shortcut__');
+                    }else{
+                        console.log('Matched');
+                        elem.removeAttribute('hidden');
+                        var labelElem = document.querySelector(labelId);
+                        labelElem.previousElementSibling.setAttribute('style','display:block');
+                        labelElem.removeAttribute('class');
+                    }
+                    
+                }
+            }
+        });
+    
+        console.log('End of handle Change');
 
     }
 }
