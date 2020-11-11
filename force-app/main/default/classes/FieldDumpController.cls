@@ -1,3 +1,8 @@
+/*
+* Author : Varun Kathepally
+* Date : 07/19/2020
+
+*/
 public with sharing class FieldDumpController {
     private static string csvHeader = '"Object","API Name","Label","Type","Is Custom","Is External ID","Is Unique","Is Formula","Is Required","Dependent Picklist","Length","Help Text","Picklist Values"\n';
     @AuraEnabled
