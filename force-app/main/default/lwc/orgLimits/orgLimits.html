@@ -1,0 +1,51 @@
+<template>
+    <h1 
+    class="slds-text-heading_large 
+    slds-text-align_center
+    slds-text-color_success
+    ">ORG LIMITS</h1>
+    <hr/>
+    <div if:true={isLoading} class="slds-is-relative">
+        <lightning-spinner variant="brand" size="large" alternative-text="Loading..."> </lightning-spinner>
+    </div>
+    <lightning-layout>
+        <lightning-layout-item size="4">
+            <div onkeyup={handleKeyUp} class="slds-m-bottom_medium slds-m-right_medium">
+                <lightning-input
+                    name="enter-search"
+                    placeholder="Search for a Limit"
+                    type="search"
+                    variant="label-hidden"
+                ></lightning-input>
+            </div>
+        </lightning-layout-item>
+        <lightning-layout-item>
+            <lightning-button 
+            variant="brand" 
+            label="Create Snapshot on Demand" 
+            title="This will create Limit Snapshot records." 
+            icon-name="utility:insert_template"
+            onclick={createSnapShotOnDemand} 
+            class="slds-m-left_x-small">
+        </lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item>
+            <lightning-button 
+            variant="brand" 
+            label={expandCollapseBtn} 
+            title="This will expand all Limits Snapshot records." 
+            icon-name={expandCollapseBtnIcon}
+            onclick={expandCollapse} 
+            class="slds-m-left_x-small">
+        </lightning-button>
+        </lightning-layout-item>
+    </lightning-layout>
+    <lightning-layout multiple-rows="true">
+        <template for:each={filteredOrgLimits} for:item="limit" for:index="index">
+            <lightning-layout-item  key={limit.Name} size="4">
+                <c-org-limits-card limit={limit} fields={fields}></c-org-limits-card>
+            </lightning-layout-item>
+        </template>
+    </lightning-layout>
+    
+</template>

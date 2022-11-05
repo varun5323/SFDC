@@ -1,0 +1,4 @@
+Max Threshold of {{{Limit_Snapshot__c.Limit_Max_Threshold__c}}} Reached for {{{Limit_Snapshot__c.Limit_Name__c}}} on {{{Limit_Snapshot__c.CreatedDate}}}
+Max Value : {{{Limit_Snapshot__c.Max_Value__c}}}
+Consumed : {{{Limit_Snapshot__c.Value__c}}}
+Consumed Percentage : {{{Limit_Snapshot__c.Consumed_Percentage__c}}}

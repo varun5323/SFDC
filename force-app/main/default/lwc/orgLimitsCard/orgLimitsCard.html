@@ -1,0 +1,101 @@
+<template>
+    <article class="slds-card slds-m-right_medium slds-m-bottom_medium">
+        <div class="slds-grid slds-card__header card-header slds-p-around_small">
+          <header class="slds-media slds-media_center slds-has-flexi-truncate">
+            <div class="slds-grid slds-grid_vertical-align-center slds-size_3-of-4 slds-medium-size_2-of-3">
+              <div class="slds-media__body">
+                <h2 class="slds-truncate" title={limit.Name}>
+                    <lightning-icon if:true={limit.reachedThreshold} 
+                        icon-name="utility:error" alternative-text="Threshold Reached!" variant="error"
+                        title="Threshold Limit Reached" size="x-small" class="slds-m-right_small"></lightning-icon>
+                        <lightning-icon if:false={limit.reachedThreshold} 
+                        icon-name="utility:success" alternative-text="Threshold Reached!" variant="success"
+                        title="Threshold Limit Reached" size="x-small" class="slds-m-right_small"></lightning-icon>
+                    <span class="">{limit.Name}</span>
+                    
+                </h2>
+              </div>
+            </div>
+            <div class="slds-size_1-of-4 slds-medium-size_1-of-3"></div>
+          </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner slds-p-bottom_large slds-p-top_large">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="4"><strong>Limit Name : </strong></lightning-layout-item>
+                <lightning-layout-item size="8">{limit.ExternalId__c}</lightning-layout-item>
+                <lightning-layout-item size="4"><strong>Limit Threshold : </strong></lightning-layout-item>
+                <lightning-layout-item size="8">{limit.Alert_Threshold__c}%</lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout>
+                <lightning-layout-item onclick={toggleSnapShot} class="slds-m-top_x-large slds-m-bottom_medium" size="12">
+                    <lightning-icon icon-name={iconDetail} size="x-small" variant="success" ></lightning-icon>
+                    <span class="slds-m-top_small btnLink">{snapShotButtonTitle} Latest Snap Shot Details</span>
+                </lightning-layout-item>
+            </lightning-layout>
+
+            
+
+
+            <template if:true={showSnapShot}>
+                <template if:true={noSnapShots}>
+                    <h2>No Latest SnapShot</h2>
+                </template>
+                <template if:false={noSnapShots}>
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="4"><strong>Consumed % : </strong></lightning-layout-item>
+                        <lightning-layout-item size="8">{snapShot.Consumed_Percentage__c}%</lightning-layout-item>
+                        <lightning-layout-item size="4"><strong>Maximum Value :</strong></lightning-layout-item>
+                        <lightning-layout-item size="8">{snapShot.Max_Value__c}</lightning-layout-item>
+                        <lightning-layout-item size="4"><strong>Consumed Value :</strong></lightning-layout-item>
+                        <lightning-layout-item size="8">{snapShot.Value__c}</lightning-layout-item>
+                    </lightning-layout>
+                </template>
+            </template>
+        </div>
+        <footer class="slds-card__footer">
+          <a class="slds-card__footer-action" onclick={toggleEdit}>Edit
+          </a>
+        </footer>
+    </article>
+
+    <!-- modal start -->      
+   <template if:true={showEdit}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- modal header start -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={toggleEdit}>
+                        <lightning-icon icon-name="utility:close"
+                        alternative-text="close"
+                        variant="inverse"
+                        size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Edit Limit {limit.Name}</h2>
+                </header>
+                <!-- modal body start -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <!--Edit Form Start-->
+                        <lightning-record-edit-form record-id={limit.Id} object-api-name="Limits__c" 
+                        onsuccess={handleSuccess} onsubmit={validateFields} onerror={handleError}>
+                            <lightning-messages data-id="message">
+                            </lightning-messages>
+                            <div class="slds-grid slds-wrap">
+                                <template if:true={fields}>
+                                    <template for:each={fields} for:item="f">
+                                    <div key={f.ApiName} class="slds-col slds-size_1-of-1">
+                                        <lightning-input-field field-name={f.ApiName}>
+                                        </lightning-input-field>
+                                        </div>
+                                    </template>
+                                </template>
+                            </div>
+                            <lightning-button type="submit" variant="brand" label="Save" onclick={saveClick}></lightning-button>
+                        </lightning-record-edit-form>
+                    <!--Edit Form End-->
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+</template>
+</template>
