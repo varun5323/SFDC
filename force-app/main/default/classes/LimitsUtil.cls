@@ -52,6 +52,23 @@ public class LimitsUtil {
     }
     
     @AuraEnabled
+    public static List<Limits__c> upsertLimits(){
+        List<Limits__c> limitsToUpsert = new List<Limits__c>();
+        Map<String,System.OrgLimit> limits = OrgLimits.getMap();
+        for(String key : limits.keySet()){
+            limitsToUpsert.add
+                (new Limits__c(
+                    Name=key,
+                    ExternalId__c=key
+                ));
+        }
+        
+        upsert limitsToUpsert ExternalId__c;
+        return limitsToUpsert;
+        
+    }
+    
+    @AuraEnabled
     public static String createSnapShotOnDemand(){
         DateTime myTime = System.now().addMinutes(2);
         String query = 'SELECT Id,Name,ExternalId__c FROM LIMITS__c';

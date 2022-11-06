@@ -11,6 +11,8 @@ export default class OrgLimitsCard extends LightningElement {
     snapShotButtonTitle = 'Show';
     showEdit = false;
     @api fields;
+    @api viewFields;
+    @api snapShotFields;
     connectedCallback(){
         this.buildSnapShots();
     }
@@ -60,6 +62,7 @@ export default class OrgLimitsCard extends LightningElement {
     {
         this.showMessage('Record Saved Successfully','success');
         this.toggleEdit();
+        this.dispatchEvent(new CustomEvent('success'));
     }
     handleError(e)
     {

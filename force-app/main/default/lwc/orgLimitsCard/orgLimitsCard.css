@@ -9,3 +9,8 @@
     font-size: 15px;
     cursor: pointer;
 }
+
+.view_form{
+    --lwc-formLabelFontSize : 13px;
+    font-weight: bold;
+ }

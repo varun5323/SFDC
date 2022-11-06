@@ -14,20 +14,11 @@
                 <lightning-input
                     name="enter-search"
                     placeholder="Search for a Limit"
-                    type="search"
+                    type="text"
+                    access-key="p"
                     variant="label-hidden"
                 ></lightning-input>
             </div>
-        </lightning-layout-item>
-        <lightning-layout-item>
-            <lightning-button 
-            variant="brand" 
-            label="Create Snapshot on Demand" 
-            title="This will create Limit Snapshot records." 
-            icon-name="utility:insert_template"
-            onclick={createSnapShotOnDemand} 
-            class="slds-m-left_x-small">
-        </lightning-button>
         </lightning-layout-item>
         <lightning-layout-item>
             <lightning-button 
@@ -39,11 +30,40 @@
             class="slds-m-left_x-small">
         </lightning-button>
         </lightning-layout-item>
+        <lightning-layout-item>
+            <lightning-button 
+            variant="brand" 
+            label="Create Snapshot on Demand" 
+            title="This will create Limit Snapshot records." 
+            icon-name="utility:insert_template"
+            onclick={createSnapShotOnDemand} 
+            class="slds-m-left_x-small"
+            if:true={isAdmin}>
+        </lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item>
+            <lightning-button 
+            variant="brand" 
+            label="Upsert All Limits" 
+            title="This will upsert Limit records." 
+            icon-name="utility:insert_template"
+            onclick={upsertLimits} 
+            class="slds-m-left_x-small"
+            if:true={isAdmin}>
+        </lightning-button>
+        </lightning-layout-item>
+        
     </lightning-layout>
     <lightning-layout multiple-rows="true">
         <template for:each={filteredOrgLimits} for:item="limit" for:index="index">
             <lightning-layout-item  key={limit.Name} size="4">
-                <c-org-limits-card limit={limit} fields={fields}></c-org-limits-card>
+                <c-org-limits-card 
+                limit={limit} 
+                fields={fields} 
+                view-fields={viewFields}
+                snap-shot-fields={snapShotFields}
+                onsuccess={getOrgLimits}>
+                </c-org-limits-card>
             </lightning-layout-item>
         </template>
     </lightning-layout>

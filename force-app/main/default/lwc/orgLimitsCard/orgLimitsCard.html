@@ -20,12 +20,24 @@
           </header>
         </div>
         <div class="slds-card__body slds-card__body_inner slds-p-bottom_large slds-p-top_large">
-            <lightning-layout multiple-rows="true">
-                <lightning-layout-item size="4"><strong>Limit Name : </strong></lightning-layout-item>
-                <lightning-layout-item size="8">{limit.ExternalId__c}</lightning-layout-item>
-                <lightning-layout-item size="4"><strong>Limit Threshold : </strong></lightning-layout-item>
-                <lightning-layout-item size="8">{limit.Alert_Threshold__c}%</lightning-layout-item>
-            </lightning-layout>
+            <lightning-record-view-form
+                object-api-name="Limits__c"
+                record-id={limit.Id}
+                density="Play dancingcomfy"
+            >
+            <lightning-messages data-id="message">
+            </lightning-messages>
+            <div class="slds-grid slds-wrap">
+                <template if:true={viewFields}>
+                    <template for:each={viewFields} for:item="f">
+                    <div key={f.ApiName} class="slds-col slds-size_1-of-2">
+                        <lightning-output-field class="slds-m-right_small view_form slds-m-bottom_large" field-name={f.ApiName}>
+                        </lightning-output-field>
+                        </div>
+                    </template>
+                </template>
+            </div>
+            </lightning-record-view-form>
             <lightning-layout>
                 <lightning-layout-item onclick={toggleSnapShot} class="slds-m-top_x-large slds-m-bottom_medium" size="12">
                     <lightning-icon icon-name={iconDetail} size="x-small" variant="success" ></lightning-icon>
@@ -41,14 +53,24 @@
                     <h2>No Latest SnapShot</h2>
                 </template>
                 <template if:false={noSnapShots}>
-                    <lightning-layout multiple-rows="true">
-                        <lightning-layout-item size="4"><strong>Consumed % : </strong></lightning-layout-item>
-                        <lightning-layout-item size="8">{snapShot.Consumed_Percentage__c}%</lightning-layout-item>
-                        <lightning-layout-item size="4"><strong>Maximum Value :</strong></lightning-layout-item>
-                        <lightning-layout-item size="8">{snapShot.Max_Value__c}</lightning-layout-item>
-                        <lightning-layout-item size="4"><strong>Consumed Value :</strong></lightning-layout-item>
-                        <lightning-layout-item size="8">{snapShot.Value__c}</lightning-layout-item>
-                    </lightning-layout>
+                    <lightning-record-view-form
+                        object-api-name="Limit_Snapshot__c"
+                        record-id={snapShot.Id}
+                        density="comfy"
+                    >
+                        <lightning-messages data-id="message">
+                        </lightning-messages>
+                        <div class="slds-grid slds-wrap">
+                            <template if:true={snapShotFields}>
+                                <template for:each={snapShotFields} for:item="f">
+                                <div key={f.ApiName} class="slds-col slds-size_1-of-2">
+                                    <lightning-output-field class="slds-m-right_small view_form slds-m-bottom_large" field-name={f.ApiName}>
+                                    </lightning-output-field>
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+                    </lightning-record-view-form>
                 </template>
             </template>
         </div>
