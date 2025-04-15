@@ -1,3 +1,0 @@
-<design:component>
-	<design:attribute name="objectName" label="Object Name" />
-</design:component>
